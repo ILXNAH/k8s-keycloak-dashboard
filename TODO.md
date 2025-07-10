@@ -101,7 +101,19 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 - [ ] Explain how components work together:
   - [ ] Role of Ingress
   - [ ] Keycloak → PostgreSQL link
-- [ ] Add architecture diagram
+- [ ] Add architecture diagram using **Lucidchart**:
+  - Show interaction between components:
+    - External user
+    - Ingress Controller
+    - Keycloak
+    - PostgreSQL
+    - Kubernetes Dashboard
+  - Include arrows to represent traffic flow (HTTP/Ingress, internal service links)
+  - Export diagram as PNG and save to `notes/architecture.png`
+  - Embed in README with:
+    ```md
+    ![Architecture Diagram](notes/architecture.png)
+    ```
 
 ---
 
