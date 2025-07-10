@@ -18,7 +18,7 @@ Time estimates are beginner-friendly and organized to help meet the Sunday deadl
 | Keycloak via Helm             | 3–3.5 hours      | Includes learning Helm, configuring secrets, probes, resources |
 | Kubernetes Dashboard          | 1.5–2 hours      | Includes RBAC, token setup, Ingress, probes |
 | Ingress (NGINX + rules)       | 2–2.5 hours      | Covers full HTTP config and testing |
-| Documentation & diagram       | 2.5–3 hours      | README + optional architecture diagram |
+| Documentation & diagram       | 3–3.5 hours      | README + architecture diagram (Lucidchart) |
 | Automation script             | 0.5–1 hour       | Bash script (e.g. `deploy.sh`) |
 | TLS + improvement planning    | 1.5–2 hours      | cert-manager, and write future ideas |
 | Final testing + GitHub polish | 1–1.5 hours      | End-to-end test + push final version |
@@ -32,7 +32,7 @@ Time estimates are beginner-friendly and organized to help meet the Sunday deadl
 | **Wed**   | Cluster setup, PostgreSQL (PVC, probes, resources)              | ~3–4 hrs |
 | **Thu**   | Helm + Keycloak (external DB, secrets, probes, limits)         | ~4–5 hrs |
 | **Fri**   | Dashboard, Ingress, TLS (cert-manager), token login            | ~4–5 hrs |
-| **Sat**   | Automation script, full README, architecture diagram, polish   | ~5–6 hrs |
+| **Sat**   | Architecture diagram (Lucidchart), automation script, full README, polish | ~5.5–6.5 hrs |
 | **Sun**   | Final walkthrough, testing, GitHub cleanup                     | ~1 hr    |
 
 ---
