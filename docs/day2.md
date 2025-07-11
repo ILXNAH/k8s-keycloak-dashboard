@@ -18,7 +18,7 @@ PostgreSQL will **not** be bundled — it will connect to the existing standalon
 
 ## 🔧 Keycloak Setup Tasks (Planned)  
 To be done using Helm:  
-- [ ] Add Bitnami Helm repo
+- [x] Add Bitnami Helm repo
 - [ ] Create `keycloak-values.yaml`
 - [ ] Set external DB config (host, user, password, db name)
 - [ ] Set admin user credentials via secret
