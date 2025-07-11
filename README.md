@@ -78,6 +78,34 @@ These values are automatically mounted into the PostgreSQL container using the `
 
 ---
 
+## 🐘 PostgreSQL Deployment
+
+PostgreSQL was deployed as a standalone pod using the official `postgres:16` image. It runs on the Kubernetes cluster with persistent storage and secure credentials.
+
+### 📁 File:
+- `k8s/postgres/postgres-deployment.yaml`
+
+### 📦 Features:
+- **Environment variables** (DB name, user, password) are injected securely via a Kubernetes Secret (`postgres-secret`)
+- **Persistent data storage** using a `PersistentVolumeClaim` (`postgres-pvc`) mounted at `/var/lib/postgresql/data`
+- **Internal accessibility** via a `ClusterIP` service (`postgres`) on port `5432`
+
+### ✅ Apply Manifests:
+```bash
+kubectl apply -f k8s/postgres/postgres-deployment.yaml
+```
+
+### 🔍 Verify Status:
+```bash
+kubectl get pods
+kubectl get svc
+kubectl describe pod <postgres-pod-name>
+```
+
+When correctly deployed, the pod should be `Running`, and the service should expose port `5432` internally to other components (e.g., Keycloak).
+
+---
+
 ## 🧾 Extras  
 ### 🔹 Kubernetes Minikube Cheat Sheet  
 A quick-reference guide for working with Minikube and applying manifests.
