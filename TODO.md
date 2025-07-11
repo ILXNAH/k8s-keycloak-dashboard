@@ -1,44 +1,38 @@
 # ✅ DevOps Case Study – To-Do List
-
 This checklist is based on the official task description for the Kubernetes deployment case study.
 
 ---
 
-## ⏳ Time Plan (Full Scope – All Bonuses Included)
-
+## ⏳ Time Plan (Full Scope – All Bonuses Included)  
 This plan reflects the full feature set including all "bonus" tasks as **required work**.  
 Time estimates are beginner-friendly and organized to help meet the Sunday deadline.
 
-### 🕒 Estimated Total: **~18–22 hours**
-
+### 🕒 Estimated Total: **~18–22 hours**  
 | Section                        | Est. Time        | Notes |
 |-------------------------------|------------------|-------|
-| Kubernetes cluster setup      | 2.5–3 hours      | Learn/setup kubeadm or Minikube |
-| PostgreSQL deployment         | 2–2.5 hours      | Includes probes + resource limits |
-| Keycloak via Helm             | 3–3.5 hours      | Includes learning Helm, configuring secrets, probes, resources |
-| Kubernetes Dashboard          | 1.5–2 hours      | Includes RBAC, token setup, Ingress, probes |
-| Ingress (NGINX + rules)       | 2–2.5 hours      | Covers full HTTP config and testing |
-| Documentation & diagram       | 3–3.5 hours      | README + architecture diagram (Lucidchart) |
-| Automation script             | 0.5–1 hour       | Bash script (e.g. `deploy.sh`) |
-| TLS + improvement planning    | 1.5–2 hours      | cert-manager, and write future ideas |
-| Final testing + GitHub polish | 1–1.5 hours      | End-to-end test + push final version |
+| Kubernetes cluster setup      | 2.5–3 hours      | Learn/setup Minikube with Ingress |
+| PostgreSQL deployment         | 2–2.5 hours      | Includes PVC, probes, resources |
+| Keycloak via Helm             | 3–3.5 hours      | Includes Helm basics, secrets, limits |
+| Kubernetes Dashboard          | 1.5–2 hours      | Includes RBAC, Ingress, token login |
+| Ingress (NGINX + rules)       | 2–2.5 hours      | Full HTTP config and testing |
+| Documentation & diagram       | 3–3.5 hours      | README + Lucidchart architecture |
+| Automation script             | 0.5–1 hour       | Bash-based (e.g. `deploy.sh`) |
+| TLS + improvement planning    | 1.5–2 hours      | cert-manager + future ideas |
+| Final testing + GitHub polish | 1–1.5 hours      | End-to-end test + push |
 
 ---
 
-### 📆 4-Day Plan to Finish by Sunday (All Bonuses Included)
-
+### 📆 Updated 4-Day Plan (Started on Thursday)  
 | Day       | Focus Areas                                                    | Est. Time |
 |-----------|----------------------------------------------------------------|-----------|
-| **Wed**   | Cluster setup, PostgreSQL (PVC, probes, resources)              | ~3–4 hrs |
-| **Thu**   | Helm + Keycloak (external DB, secrets, probes, limits)         | ~4–5 hrs |
-| **Fri**   | Dashboard, Ingress, TLS (cert-manager), token login            | ~4–5 hrs |
-| **Sat**   | Architecture diagram (Lucidchart), automation script, full README, polish | ~5.5–6.5 hrs |
-| **Sun**   | Final walkthrough, testing, GitHub cleanup                     | ~1 hr    |
+| **Thu**   | ✅ Cluster setup (complete) <br> 🚧 PostgreSQL (in progress)     | ~3–4 hrs |
+| **Fri**   | Keycloak via Helm (external DB, secrets, probes, limits)       | ~4–5 hrs |
+| **Sat**   | Dashboard, Ingress, TLS (cert-manager), token login            | ~4–5 hrs |
+| **Sun**   | Diagram (Lucidchart), automation script, README polish <br> Final testing & GitHub cleanup | ~6–7 hrs |
 
 ---
 
-## 🧱 Objective
-
+## 🧱 Objective  
 Deploy a complete environment on a **self-managed Kubernetes cluster** consisting of:
 
 - [ ] PostgreSQL (with persistent storage)
@@ -48,16 +42,14 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 
 ---
 
-## 🔧 Kubernetes Cluster Setup
-
+## 🔧 Kubernetes Cluster Setup  
 - [ ] Create a **single-node Kubernetes cluster** on Linux (Ubuntu preferred)
 - [ ] Can be installed in a local VM
 - [ ] Any installation method allowed (e.g. `kubeadm`, Minikube with care, etc.)
 
 ---
 
-## 📦 PostgreSQL
-
+## 📦 PostgreSQL  
 - [ ] Deploy PostgreSQL with:
   - [ ] PersistentVolumeClaim for storage (stay available after restarts)
   - [ ] Standalone container (no bundling with Keycloak)
@@ -65,8 +57,7 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 
 ---
 
-## 🧩 Keycloak
-
+## 🧩 Keycloak  
 - [ ] Deploy standalone Keycloak container
 - [ ] Use PostgreSQL as its backend (no embedded H2 database)
 - [ ] Expose Keycloak admin console via web (web browser accessible)
@@ -74,16 +65,14 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 
 ---
 
-## 🖥️ Kubernetes Dashboard
-
+## 🖥️ Kubernetes Dashboard  
 - [ ] Deploy official Kubernetes Dashboard
 - [ ] Web-accessible via Ingress
 - [ ] Token-based login (or other method, must be described)
 
 ---
 
-## 🌐 Ingress Setup
-
+## 🌐 Ingress Setup  
 - [ ] Install and configure Ingress Controller (e.g. NGINX)
 - [ ] Create Ingress rules for:
   - [ ] Keycloak (e.g. `keycloak.local`)
@@ -93,7 +82,6 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 📚 Documentation (README content)
-
 - [ ] Describe tested environment (OS, K8s version, etc.)
 - [ ] How to deploy each component
 - [ ] Ingress routes (hostnames, ports) & `/etc/hosts` setup
@@ -118,7 +106,6 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 🔧 Advanced Configuration Features
-
 - [ ] Automation script (e.g. in bash, `deploy.sh`)
 - [ ] Use liveness and readiness probes
 - [ ] Set resource requests and limits
@@ -131,7 +118,6 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 📤 Final Output
-
 - [ ] All manifests in GitHub repo
 - [ ] Clean, readable YAML
 - [ ] Helm chart(s) for at least one component (e.g. Keycloak via Bitnami chart with embedded DB disabled and customized values.yaml, with PostgreSQL and Ingress configured manually)
