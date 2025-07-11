@@ -25,7 +25,7 @@ Time estimates are beginner-friendly and organized to help meet the Sunday deadl
 ### 📆 Updated 4-Day Plan (Started on Thursday)  
 | Day       | Focus Areas                                                    | Est. Time |
 |-----------|----------------------------------------------------------------|-----------|
-| **Thu**   | ✅ Cluster setup (complete) <br> 🚧 PostgreSQL (in progress)     | ~3–4 hrs |
+| **Thu**   | ✅ Cluster setup (complete) <br> ✅ PostgreSQL (complete)     | ~3–4 hrs |
 | **Fri**   | Keycloak via Helm (external DB, secrets, probes, limits)       | ~4–5 hrs |
 | **Sat**   | Dashboard, Ingress, TLS (cert-manager), token login            | ~4–5 hrs |
 | **Sun**   | Diagram (Lucidchart), automation script, README polish <br> Final testing & GitHub cleanup | ~6–7 hrs |
@@ -35,7 +35,7 @@ Time estimates are beginner-friendly and organized to help meet the Sunday deadl
 ## 🧱 Objective  
 Deploy a complete environment on a **self-managed Kubernetes cluster** consisting of:
 
-- [ ] PostgreSQL (with persistent storage)
+- [x] PostgreSQL (with persistent storage)
 - [ ] Keycloak (backed by PostgreSQL, not H2)
 - [ ] Kubernetes Dashboard
 - [ ] Ingress to expose Keycloak & Dashboard over HTTP (HTTPS = bonus)
@@ -50,10 +50,10 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 📦 PostgreSQL  
-- [ ] Deploy PostgreSQL with:
-  - [ ] PersistentVolumeClaim for storage (stay available after restarts)
-  - [ ] Standalone container (no bundling with Keycloak)
-  - [ ] Exposed via internal K8s service
+- [x] Deploy PostgreSQL with:
+  - [x] PersistentVolumeClaim for storage (stay available after restarts)
+  - [x] Standalone container (no bundling with Keycloak)
+  - [x] Exposed via internal K8s service
 
 ---
 
