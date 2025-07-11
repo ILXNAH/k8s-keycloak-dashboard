@@ -44,7 +44,7 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 🔧 Kubernetes Cluster Setup  
-- [x] Create a **single-node Kubernetes cluster** on Linux (Ubuntu preferred)
+- [x] Create a **single-node Kubernetes cluster** on Linux (WSL2 Ubuntu 24.04.2 LTS)
 - [x] Can be installed in a local VM
 - [x] Any installation method allowed (Minikube)
 
