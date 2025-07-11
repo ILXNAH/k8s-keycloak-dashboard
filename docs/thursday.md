@@ -22,16 +22,16 @@ Minikube was selected for its simplicity, reproducibility, and fast local setup 
 
 Tasks:
 - [x] Decide on Minikube as the runtime
-- [ ] Install Minikube on local Ubuntu
-- [ ] Start cluster with recommended settings:
+- [x] Install Minikube on local Ubuntu
+- [x] Start cluster with recommended settings (optimized for WSL2 + Docker Desktop):
   ```bash
-  minikube start --cpus=4 --memory=6g --driver=docker
+  minikube start --driver=docker
   ```
-- [ ] Enable Ingress:
+- [x] Enable Ingress addon:
   ```bash
   minikube addons enable ingress
   ```
-- [ ] Test cluster health:
+- [x] Test cluster health:
   ```bash
   kubectl get nodes
   kubectl get pods -A
