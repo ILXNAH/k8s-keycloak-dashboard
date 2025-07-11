@@ -53,6 +53,31 @@ The PVC should show `STATUS: Bound` and reference the `postgres-pv` volume.
 
 ---
 
+## 🔐 PostgreSQL Credentials via Kubernetes Secret
+
+PostgreSQL credentials are managed securely using a Kubernetes `Secret` resource. This prevents hardcoding sensitive data directly in deployment manifests or version control.
+
+### 📁 File:
+- `k8s/postgres/postgres-secret.yaml`
+
+### 🧾 Secret Contents:
+The secret contains the following key-value pairs:
+- `POSTGRES_USER`: the PostgreSQL username (e.g., `keycloak`)
+- `POSTGRES_PASSWORD`: the database password (e.g., `supersecret`)
+- `POSTGRES_DB`: the name of the database to create on container init (e.g., `keycloakdb`)
+
+These values are automatically mounted into the PostgreSQL container using the `envFrom` directive.
+
+### ✅ Why Use a Secret?
+- Keeps credentials **separate from pod definitions**
+- Prevents secrets from being exposed in Git repositories
+- Allows for **easier rotation of credentials** without editing the Deployment
+- Supports **centralized credential control**: Secrets can be updated or patched independently
+
+> Note: Secrets are base64-encoded in Kubernetes. In production environments, it is recommended to encrypt secrets at rest and restrict access via RBAC.
+
+---
+
 ## 🧾 Extras  
 ### 🔹 Kubernetes Minikube Cheat Sheet  
 A quick-reference guide for working with Minikube and applying manifests.
