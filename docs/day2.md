@@ -12,7 +12,7 @@ PostgreSQL will **not** be bundled — it will connect to the existing standalon
 - Meets the requirement to deploy Keycloak independently
 - Avoids H2 (uses external Postgres)
 - Helm is reusable and customizable
-- Allows us to inject secrets and config via `values.yaml`
+- Allows to inject secrets and config via `values.yaml`
 
 ---
 
