@@ -1,10 +1,10 @@
-## 🏗️ Cluster Setup
+## 🏗️ Cluster Setup  
 To set up the Kubernetes cluster used in this project, follow the instructions in  
 👉 [setup/cluster-setup.md](setup/cluster-setup.md)
 
 ---
 
-## 🧪 Tested Environment
+## 🧪 Tested Environment  
 The project was built and tested on the following environment:
 
 ```
@@ -21,8 +21,40 @@ Ingress addon and Kubernetes Dashboard were both enabled and verified.
 
 ---
 
-## 🧾 Extras
-### 🔹 Kubernetes Minikube Cheat Sheet
+## 📦 PostgreSQL Persistent Storage Setup  
+To ensure PostgreSQL data persists across pod restarts and cluster reboots, a `PersistentVolume` (PV) and `PersistentVolumeClaim` (PVC) were defined manually.
+
+### 📁 Files:  
+- `k8s/postgres/postgres-pv-pvc.yaml`
+
+### 🧱 Resources Created:  
+- **PersistentVolume** `postgres-pv`  
+  - Storage: 1Gi  
+  - Path: `/data/postgres` on the Minikube host (via `hostPath`)  
+  - Access Mode: `ReadWriteOnce`  
+- **PersistentVolumeClaim** `postgres-pvc`  
+  - Requests 1Gi of storage  
+  - Binds to the above PV
+
+> Note: The PVC explicitly sets `storageClassName: ""` to prevent binding to the default dynamic storage class provided by Minikube.
+
+### ✅ Apply Manifests:  
+```bash
+kubectl apply -f k8s/postgres/postgres-pv-pvc.yaml
+```
+
+### 🔍 Verify Status:  
+```bash
+kubectl get pv
+kubectl get pvc
+```
+
+The PVC should show `STATUS: Bound` and reference the `postgres-pv` volume.
+
+---
+
+## 🧾 Extras  
+### 🔹 Kubernetes Minikube Cheat Sheet  
 A quick-reference guide for working with Minikube and applying manifests.
 
 📄 [View cheat sheet](notes/k8s-minikube-cheatsheet.md)
