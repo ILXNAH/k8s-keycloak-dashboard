@@ -1,16 +1,13 @@
-# 🏗️ Cluster Setup Guide (Minikube on Ubuntu)
-
+# 🏗️ Cluster Setup Guide (Minikube on Ubuntu)  
 This guide explains how to set up a **single-node Kubernetes cluster** using **Minikube** on a Linux machine (Ubuntu 22.04+).  
 This setup is intended for local testing of this DevOps case study.
 
 ---
 
-## 📋 Prerequisites
-
+## 📋 Prerequisites  
 Make sure you are running this inside a Linux-based environment with sudo access (e.g., local Ubuntu VM).
 
-### Recommended system resources:
-
+### Recommended system resources:  
 - 🧠 **RAM**: 6 GB
 - 🖥️ **CPUs**: 4
 - 💾 **Disk**: 20+ GB free space
@@ -18,19 +15,16 @@ Make sure you are running this inside a Linux-based environment with sudo access
 ---
 
 ## 🧰 Step 1 – Install Dependencies
-
-Make sure the following tools are installed and working:
+Make sure the following tools are installed and working:  
 
 - ✅ [Docker](https://www.docker.com/) – used as the container runtime
-- ✅ [`kubectl`](https://kubernetes.io/docs/tasks/tools/) – Kubernetes CLI
-- ✅ [`minikube`](https://minikube.sigs.k8s.io/docs/start/) – for running a local single-node cluster
+- ✅ [kubectl](https://kubernetes.io/docs/tasks/tools/) – Kubernetes CLI
+- ✅ [minikube](https://minikube.sigs.k8s.io/docs/start/) – for running a local single-node cluster
 
 ---
 
-## 🚀 Step 2 – Start the Cluster
-
-Start a local Kubernetes cluster using Minikube with the Docker driver.
-
+## 🚀 Step 2 – Start the Cluster  
+Start a local Kubernetes cluster using Minikube with the Docker driver.  
 ```bash
 minikube start --driver=docker
 ```
@@ -41,9 +35,7 @@ minikube start --driver=docker
 ---
 
 ## 🌐 Step 3 – Enable Ingress
-
-Enable the built-in NGINX Ingress controller in Minikube:
-
+Enable the built-in NGINX Ingress controller in Minikube:  
 ```bash
 minikube addons enable ingress
 ```
@@ -52,30 +44,25 @@ minikube addons enable ingress
 > It may take a few moments before all related pods are up and running.
 
 You can check the deployment status with:
-
 ```bash
 kubectl get pods -n ingress-nginx
 ```
 
 ---
 
-## 🔍 Step 4 – Verify Cluster is Running
-
+## 🔍 Step 4 – Verify Cluster is Running  
 After starting the cluster and enabling Ingress, confirm that everything is healthy:
-
 ```bash
 kubectl get nodes
 ```
 
 You should see output similar to:
-
 ```
 NAME       STATUS   ROLES           AGE   VERSION
 minikube   Ready    control-plane   5m    v1.32.0
 ```
 
 Check all running pods across namespaces:
-
 ```bash
 kubectl get pods -A
 ```
@@ -89,20 +76,16 @@ Look for:
 
 ---
 
-### 📋 (Optional) Cluster Metadata
-
+### 📋 (Optional) Cluster Metadata  
 You can also collect some version and environment details for documentation:
-
 ```bash
 kubectl version
 kubectl cluster-info
 
 ---
 
-## 🧪 Step 5 – Test Dashboard (Optional)
-
-To open the Kubernetes dashboard in your browser:
-
+## 🧪 Step 5 – Test Dashboard (Optional)  
+To open the Kubernetes dashboard in your browser:  
 ```bash
 minikube dashboard
 ```
@@ -124,16 +107,13 @@ minikube dashboard
 
 ---
 
-## 🧹 Cleanup
-
-To stop and remove the cluster:
-
+## 🧹 Cleanup  
+To stop and remove the cluster:  
 ```bash
 minikube delete
 ```
 
 ---
 
-## ✅ What's Next?
-
-Once your cluster is ready, continue with deploying the application components from the [k8s/](../k8s/) directory.
+## ✅ What's Next?  
+Once your cluster is ready, continue with deploying the application components from the [k8s/](../k8s/) directory.  
