@@ -38,7 +38,7 @@ Tasks:
 ## 📦 PostgreSQL Setup (Planned for Later Today)
 To be done after confirming Minikube setup:
 
-- [ ] Write PersistentVolumeClaim (PVC)
+- [x] Write PersistentVolumeClaim (PVC)
 - [ ] Create PostgreSQL Deployment using official image
 - [ ] Set credentials and DB name via Secret or env vars
 - [ ] Expose PostgreSQL via ClusterIP service
