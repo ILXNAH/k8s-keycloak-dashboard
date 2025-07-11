@@ -35,6 +35,7 @@ Time estimates are beginner-friendly and organized to help meet the Sunday deadl
 ## 🧱 Objective  
 Deploy a complete environment on a **self-managed Kubernetes cluster** consisting of:
 
+- [x] Kubernetes cluster (Minikube with Ingress)
 - [x] PostgreSQL (with persistent storage)
 - [ ] Keycloak (backed by PostgreSQL, not H2)
 - [ ] Kubernetes Dashboard
@@ -43,9 +44,9 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 🔧 Kubernetes Cluster Setup  
-- [ ] Create a **single-node Kubernetes cluster** on Linux (Ubuntu preferred)
-- [ ] Can be installed in a local VM
-- [ ] Any installation method allowed (e.g. `kubeadm`, Minikube with care, etc.)
+- [x] Create a **single-node Kubernetes cluster** on Linux (Ubuntu preferred)
+- [x] Can be installed in a local VM
+- [x] Any installation method allowed (Minikube)
 
 ---
 
