@@ -1,4 +1,4 @@
-# 📅 Wednesday Recap – Kubernetes Cluster & PostgreSQL Setup
+# 📅 Day 1 Recap – Kubernetes Cluster & PostgreSQL Setup
 This summary documents the work planned and completed for **Day 1** of the Kubernetes DevOps case study.
 
 ---
@@ -39,10 +39,10 @@ Tasks:
 To be done after confirming Minikube setup:
 
 - [x] Write PersistentVolumeClaim (PVC)
-- [ ] Create PostgreSQL Deployment using official image
+- [x] Create PostgreSQL Deployment using official image
 - [x] Set credentials and DB name via Secret or env vars
-- [ ] Expose PostgreSQL via ClusterIP service
-- [ ] Verify pod and volume status
+- [x] Expose PostgreSQL via ClusterIP service
+- [x] Verify pod and volume status
 
 ---
 
@@ -51,7 +51,7 @@ To be done after confirming Minikube setup:
 |-------------------------|-------------|
 | Minikube setup          | ~1.5–2 hrs  |
 | PostgreSQL manifests    | ~1.5–2 hrs  |
-| **Total for Wednesday** | **~3–4 hrs** |
+| **Total for Day 1** | **~3–4 hrs** |
 
 ---
 
