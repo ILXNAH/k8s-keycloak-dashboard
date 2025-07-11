@@ -40,7 +40,7 @@ To be done after confirming Minikube setup:
 
 - [x] Write PersistentVolumeClaim (PVC)
 - [ ] Create PostgreSQL Deployment using official image
-- [ ] Set credentials and DB name via Secret or env vars
+- [x] Set credentials and DB name via Secret or env vars
 - [ ] Expose PostgreSQL via ClusterIP service
 - [ ] Verify pod and volume status
 
