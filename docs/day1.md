@@ -58,4 +58,4 @@ To be done after confirming Minikube setup:
 ## 🗒️ Notes
 - Kubeadm was evaluated but deemed too complex for a portable demo project
 - All decisions align with the case study requirements
-- Setup steps will be documented in detail in `setup/cluster-setup.md`
+- Setup steps will be documented in detail in [setup/cluster-setup.md](setup/cluster-setup.md)
