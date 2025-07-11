@@ -41,6 +41,6 @@ To be done using Helm:
 ---
 
 ## 🗒️ Notes  
-- Chart used: [`bitnami/keycloak`](https://artifacthub.io/packages/helm/bitnami/keycloak)
+- Chart used: [bitnami/keycloak](https://artifacthub.io/packages/helm/bitnami/keycloak)
 - Database section in `values.yaml` will disable the embedded PostgreSQL and link to the external ClusterIP service
 - Setup will be extended later with Ingress and TLS (planned for Day 3)  
