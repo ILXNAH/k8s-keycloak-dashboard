@@ -1,13 +1,10 @@
 # 📅 Wednesday Recap – Kubernetes Cluster & PostgreSQL Setup
-
 This summary documents the work planned and completed for **Day 1** of the Kubernetes DevOps case study.
 
 ---
 
 ## ✅ Cluster Setup Strategy
-
 ### Chosen Method: **Minikube**
-
 Minikube was selected for its simplicity, reproducibility, and fast local setup — ideal for a public GitHub project.
 
 ### Justification:
@@ -19,7 +16,6 @@ Minikube was selected for its simplicity, reproducibility, and fast local setup 
 ---
 
 ## 🔧 Kubernetes Cluster Setup (Minikube)
-
 Tasks:
 - [x] Decide on Minikube as the runtime
 - [x] Install Minikube on local Ubuntu
@@ -40,7 +36,6 @@ Tasks:
 ---
 
 ## 📦 PostgreSQL Setup (Planned for Later Today)
-
 To be done after confirming Minikube setup:
 
 - [ ] Write PersistentVolumeClaim (PVC)
@@ -52,7 +47,6 @@ To be done after confirming Minikube setup:
 ---
 
 ## ⏳ Time Estimate (Today)
-
 | Task                    | Time        |
 |-------------------------|-------------|
 | Minikube setup          | ~1.5–2 hrs  |
@@ -62,7 +56,6 @@ To be done after confirming Minikube setup:
 ---
 
 ## 🗒️ Notes
-
 - Kubeadm was evaluated but deemed too complex for a portable demo project
 - All decisions align with the case study requirements
 - Setup steps will be documented in detail in `setup/cluster-setup.md`
