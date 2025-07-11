@@ -8,6 +8,7 @@ To set up the Kubernetes cluster used in this project, follow the instructions i
 The project was built and tested on the following environment:
 
 ```
+OS: Ubuntu 24.04.2 LTS (WSL2)  
 Client Version: v1.32.2  
 Kustomize Version: v5.5.0  
 Server Version: v1.32.0  
@@ -16,7 +17,7 @@ Kubernetes control plane is running at https://127.0.0.1:50512
 CoreDNS is running at https://127.0.0.1:50512/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 ```
 
-Minikube was used with the Docker driver on Ubuntu 24.04 running under WSL2.  
+Minikube was used with the Docker driver inside WSL2.  
 Ingress addon and Kubernetes Dashboard were both enabled and verified.
 
 ---
