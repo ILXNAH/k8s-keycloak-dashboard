@@ -69,7 +69,19 @@ The secret contains the following key-value pairs:
 
 These values are automatically mounted into the PostgreSQL container using the `envFrom` directive.
 
-### ✅ Why Use a Secret?
+### ✅ Apply Secret:
+```bash
+kubectl apply -f k8s/postgres/postgres-secret.yaml
+```
+
+### 🔍 Verify Status:
+```bash
+kubectl get secret postgres-secret -o yaml
+```
+
+You should see base64-encoded values for `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB`.
+
+### 📌 Why Use a Secret?
 - Keeps credentials **separate from pod definitions**
 - Prevents secrets from being exposed in Git repositories
 - Allows for **easier rotation of credentials** without editing the Deployment
