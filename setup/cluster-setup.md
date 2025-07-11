@@ -81,6 +81,7 @@ You can also collect some version and environment details for documentation:
 ```bash
 kubectl version
 kubectl cluster-info
+```
 
 ---
 
