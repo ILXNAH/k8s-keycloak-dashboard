@@ -54,14 +54,13 @@ The PVC should show `STATUS: Bound` and reference the `postgres-pv` volume.
 
 ---
 
-## 🔐 PostgreSQL Credentials via Kubernetes Secret
-
+## 🔐 PostgreSQL Credentials via Kubernetes Secret  
 PostgreSQL credentials are managed securely using a Kubernetes `Secret` resource. This prevents hardcoding sensitive data directly in deployment manifests or version control.
 
-### 📁 File:
+### 📁 File:  
 - `k8s/postgres/postgres-secret.yaml`
 
-### 🧾 Secret Contents:
+### 🧾 Secret Contents:  
 The secret contains the following key-value pairs:
 - `POSTGRES_USER`: the PostgreSQL username (e.g., `keycloak`)
 - `POSTGRES_PASSWORD`: the database password (e.g., `supersecret`)
@@ -69,19 +68,19 @@ The secret contains the following key-value pairs:
 
 These values are automatically mounted into the PostgreSQL container using the `envFrom` directive.
 
-### ✅ Apply Secret:
+### ✅ Apply Secret:  
 ```bash
 kubectl apply -f k8s/postgres/postgres-secret.yaml
 ```
 
-### 🔍 Verify Status:
+### 🔍 Verify Status:  
 ```bash
 kubectl get secret postgres-secret -o yaml
 ```
 
 You should see base64-encoded values for `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB`.
 
-### 📌 Why Use a Secret?
+### 📌 Why Use a Secret?  
 - Keeps credentials **separate from pod definitions**
 - Prevents secrets from being exposed in Git repositories
 - Allows for **easier rotation of credentials** without editing the Deployment
@@ -91,24 +90,23 @@ You should see base64-encoded values for `POSTGRES_USER`, `POSTGRES_PASSWORD`, a
 
 ---
 
-## 🐘 PostgreSQL Deployment
-
+## 🐘 PostgreSQL Deployment  
 PostgreSQL was deployed as a standalone pod using the official `postgres:16` image. It runs on the Kubernetes cluster with persistent storage and secure credentials.
 
-### 📁 File:
+### 📁 File:  
 - `k8s/postgres/postgres-deployment.yaml`
 
-### 📦 Features:
+### 📦 Features:  
 - **Environment variables** (DB name, user, password) are injected securely via a Kubernetes Secret (`postgres-secret`)
 - **Persistent data storage** using a `PersistentVolumeClaim` (`postgres-pvc`) mounted at `/var/lib/postgresql/data`
 - **Internal accessibility** via a `ClusterIP` service (`postgres`) on port `5432`
 
-### ✅ Apply Manifests:
+### ✅ Apply Manifests:  
 ```bash
 kubectl apply -f k8s/postgres/postgres-deployment.yaml
 ```
 
-### 🔍 Verify Status:
+### 🔍 Verify Status:  
 ```bash
 kubectl get pods
 kubectl get svc
@@ -117,10 +115,18 @@ kubectl describe pod <postgres-pod-name>
 
 When correctly deployed, the pod should be `Running`, and the service should expose port `5432` internally to other components (e.g., Keycloak).
 
+### 🪵 View Logs (Optional)
+To check PostgreSQL startup logs or debug issues:
+```bash
+kubectl logs <postgres-pod-name>
+```
+
+You can auto-complete the pod name with `Tab` after typing `postgres-`.
+
 ---
 
 ## 🧾 Extras  
 ### 🔹 Kubernetes Minikube Cheat Sheet  
 A quick-reference guide for working with Minikube and applying manifests.
 
-📄 [View cheat sheet](notes/k8s-minikube-cheatsheet.md)
+📄 [View cheat sheet](notes/k8s-minikube-cheatsheet.md)  
