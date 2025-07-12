@@ -168,7 +168,6 @@ kubectl get pods
 kubectl get svc
 ```  
 You should see a pod named `keycloak-xxxxx` in the `Running` state and a service exposing the configured NodePort.
-> A proper Ingress setup (with TLS) will be configured later in **Day 3**.
 
 ---
 
@@ -187,8 +186,7 @@ This script:
   - PersistentVolume and PersistentVolumeClaim
   - Secret with DB credentials
   - Deployment and ClusterIP service  
-> 🧠 Note: This script is optimized for **WSL2 + Docker Desktop**.  
-> If you're using native Linux or macOS, you may need to modify the Minikube driver flag (e.g., `--driver=virtualbox`).
+> 🧠 Note: This script is optimized for **WSL2 + Docker Desktop**. If you're using native Linux or macOS, you may need to modify the Minikube driver flag (e.g., `--driver=virtualbox`).
 
 ### 🧭 What’s Covered by the Script
 This script automates the deployment of the Kubernetes cluster and PostgreSQL database, including persistent storage and secrets.  
