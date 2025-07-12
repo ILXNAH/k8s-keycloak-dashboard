@@ -1,8 +1,8 @@
 # Use this helper to quickly export Keycloak NodePort access info
 
 # Export the NodePort and cluster IP
-if kubectl get svc keycloak &>/dev/null; then
-  export HTTP_NODE_PORT=$(kubectl get svc keycloak -o jsonpath="{.spec.ports[?(@.name=='http')].nodePort}")
+if kubectl get svc keycloak -n keycloak &>/dev/null; then
+  export HTTP_NODE_PORT=$(kubectl get svc keycloak -n keycloak -o jsonpath="{.spec.ports[?(@.name=='http')].nodePort}")
   export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}")
   export KEYCLOAK_URL="http://${NODE_IP}:${HTTP_NODE_PORT}/"
 fi
