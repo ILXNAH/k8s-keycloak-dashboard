@@ -21,7 +21,7 @@ To be done using Helm:
 - [x] Add Bitnami Helm repo
 - [x] Create `keycloak-values.yaml`
 - [x] Set external DB config (host, user, password, db name)
-- [ ] Set admin user credentials via secret
+- [x] Set admin user credentials via secret
 - [ ] Configure resource limits and probes
 - [ ] Install chart with custom values
 - [ ] Verify Keycloak pod is running

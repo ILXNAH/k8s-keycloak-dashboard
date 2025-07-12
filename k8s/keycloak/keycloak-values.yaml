@@ -1,6 +1,7 @@
 auth:
-  adminUser: admin
-  adminPassword: adminpassword
+  existingSecret: keycloak-admin-secret
+  passwordSecretKey: admin-password
+  usernameSecretKey: admin-user
 externalDatabase:
   host: postgres
   port: 5432
