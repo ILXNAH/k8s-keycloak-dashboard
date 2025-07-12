@@ -14,8 +14,7 @@ Server Version: v1.32.0
 
 Kubernetes control plane is running at https://127.0.0.1:50512  
 CoreDNS is running at https://127.0.0.1:50512/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-```
-
+```  
 Minikube was used with the Docker driver inside WSL2.  
 Ingress addon and Kubernetes Dashboard were both enabled and verified.
 
@@ -47,8 +46,7 @@ kubectl apply -f k8s/postgres/postgres-pv-pvc.yaml
 ```bash
 kubectl get pv
 kubectl get pvc
-```
-
+```  
 The PVC should show `STATUS: Bound` and reference the `postgres-pv` volume.
 
 ---
@@ -63,8 +61,7 @@ PostgreSQL credentials are managed securely using a Kubernetes `Secret` resource
 The secret contains the following key-value pairs:
 - `POSTGRES_USER`: the PostgreSQL username (e.g., `keycloak`)
 - `POSTGRES_PASSWORD`: the database password (e.g., `supersecret`)
-- `POSTGRES_DB`: the name of the database to create on container init (e.g., `keycloakdb`)
-
+- `POSTGRES_DB`: the name of the database to create on container init (e.g., `keycloakdb`)  
 These values are automatically mounted into the PostgreSQL container using the `envFrom` directive.
 
 ### ✅ Apply Secret:  
@@ -76,15 +73,13 @@ kubectl apply -f k8s/postgres/postgres-secret.yaml
 ```bash
 kubectl get secret postgres-secret -o yaml
 ```
-
 You should see base64-encoded values for `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB`.
 
 ### 📌 Why Use a Secret?  
 - Keeps credentials **separate from pod definitions**
 - Prevents secrets from being exposed in Git repositories
 - Allows for **easier rotation of credentials** without editing the Deployment
-- Supports **centralized credential control**: Secrets can be updated or patched independently
-
+- Supports **centralized credential control**: Secrets can be updated or patched independently  
 > Note: Secrets are base64-encoded in Kubernetes. In production environments, it is recommended to encrypt secrets at rest and restrict access via RBAC.
 
 ---
@@ -110,18 +105,15 @@ kubectl apply -f k8s/postgres/postgres-deployment.yaml
 kubectl get pods
 kubectl get svc
 kubectl describe pod <postgres-pod-name>
-```
-
+```  
 When correctly deployed, the pod should be `Running`, and the service should expose port `5432` internally to other components (e.g., Keycloak).
 
 ### 🐞 View Logs (Optional):
 To check PostgreSQL startup logs or debug issues:
 ```bash
 kubectl logs <postgres-pod-name>
-```
-> 💡 **Tip**: If you're using a terminal with `kubectl` shell completion enabled  
-> (e.g., in WSL2 with Bash or Zsh), you can press `Tab` after typing `postgres-`  
-> to auto-complete the pod name.
+```  
+> 💡 **Tip**: If you're using a terminal with `kubectl` shell completion enabled (e.g., in WSL2 with Bash or Zsh), you can press `Tab` after typing `postgres-` to auto-complete the pod name.
 
 ---
 
@@ -167,18 +159,15 @@ kubectl get secret keycloak-admin-secret -o yaml
 ### 🚀 Deploy Keycloak:
 ```bash
 helm install keycloak bitnami/keycloak -f k8s/keycloak/keycloak-values.yaml
-```
-
+```  
 > 💡 In production, it's recommended to encrypt secrets at rest and rotate them periodically.
 
 ### 🔍 Verify Deployment (after install):
 ```bash
 kubectl get pods
 kubectl get svc
-```
-
+```  
 You should see a pod named `keycloak-xxxxx` in the `Running` state and a service exposing the configured NodePort.
-
 > A proper Ingress setup (with TLS) will be configured later in **Day 3**.
 
 ---
@@ -191,15 +180,13 @@ After installing Docker, Minikube, and kubectl, you can launch the stack with:
 ```bash
 ./deploy.sh
 ```
-
 This script:
 - Starts a Minikube cluster with the Docker driver
 - Enables the NGINX Ingress controller
 - Applies all PostgreSQL manifests:
   - PersistentVolume and PersistentVolumeClaim
   - Secret with DB credentials
-  - Deployment and ClusterIP service
-
+  - Deployment and ClusterIP service  
 > 🧠 Note: This script is optimized for **WSL2 + Docker Desktop**.  
 > If you're using native Linux or macOS, you may need to modify the Minikube driver flag (e.g., `--driver=virtualbox`).
 
@@ -211,8 +198,7 @@ Keycloak and Kubernetes Dashboard are deployed separately using Helm and custom 
 
 ## 🧾 Extras  
 ### 🔹 Kubernetes Minikube Cheat Sheet  
-A quick-reference guide for working with Minikube and applying manifests.
-
+A quick-reference guide for working with Minikube and applying manifests.  
 📄 [View cheat sheet](notes/k8s-minikube-cheatsheet.md)  
 
 ---
