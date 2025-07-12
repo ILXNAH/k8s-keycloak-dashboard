@@ -32,11 +32,13 @@ echo "✅  PostgreSQL should now be deploying..."
 
 echo "⏳  Waiting for PostgreSQL pod to be ready..."
 
-kubectl wait --for=condition=Ready pod \
+if kubectl wait --for=condition=Ready pod \
   --selector=app=postgres \
-  --timeout=90s
-
-echo "✅  PostgreSQL pod is ready!"
+  --timeout=90s; then
+  echo "✅  PostgreSQL pod is ready!"
+else
+  echo "⚠️  PostgreSQL pod not ready after 90s — continuing anyway."
+fi
 
 echo "📦  PVC status:"
 kubectl get pvc
