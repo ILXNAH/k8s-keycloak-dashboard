@@ -114,7 +114,7 @@ kubectl describe pod <postgres-pod-name>
 
 When correctly deployed, the pod should be `Running`, and the service should expose port `5432` internally to other components (e.g., Keycloak).
 
-### 🪵 View Logs (Optional):
+### 🐞 View Logs (Optional):
 To check PostgreSQL startup logs or debug issues:
 ```bash
 kubectl logs <postgres-pod-name>
