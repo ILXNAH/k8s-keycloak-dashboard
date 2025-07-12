@@ -26,6 +26,7 @@ To be done using Helm:
 - [ ] Install chart with custom values
 - [ ] Verify Keycloak pod is running
 - [ ] Access admin console via NodePort (temporary check)
+- [ ] Create `deploy-keycloak.sh` script (optional automation task)  
 
 ---
 
