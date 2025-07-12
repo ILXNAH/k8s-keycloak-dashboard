@@ -189,8 +189,7 @@ This script:
 > 🧠 Note: This script is optimized for **WSL2 + Docker Desktop**. If you're using native Linux or macOS, you may need to modify the Minikube driver flag (e.g., `--driver=virtualbox`).
 
 ### 🧭 What’s Covered by the Script
-This script automates the deployment of the Kubernetes cluster and PostgreSQL database, including persistent storage and secrets.  
-Keycloak and Kubernetes Dashboard are deployed separately using Helm and custom configuration.
+This script automates the deployment of the Kubernetes cluster and PostgreSQL database, including persistent storage and secrets. Keycloak and Kubernetes Dashboard are deployed separately using Helm and custom configuration.
 
 ---
 
