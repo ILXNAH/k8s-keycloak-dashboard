@@ -9,30 +9,30 @@ if ! grep -qi "microsoft" /proc/version; then
   echo
 fi
 
-echo "🔧 Deploying k8s-keycloak-dashboard environment..."
+echo "🔧  Deploying k8s-keycloak-dashboard environment..."
 
-echo "🚀 Starting Minikube cluster using Docker driver..."
+echo "🚀  Starting Minikube cluster using Docker driver..."
 minikube start --driver=docker
 
-echo "✅ Enabling Ingress addon..."
+echo "✅  Enabling Ingress addon..."
 minikube addons enable ingress
 
-echo "⏳ Waiting for Ingress controller to be ready..."
+echo "⏳  Waiting for Ingress controller to be ready..."
 kubectl wait --namespace ingress-nginx \
   --for=condition=Ready pod \
   --selector=app.kubernetes.io/component=controller \
   --timeout=90s
 
-echo "📦 Applying PostgreSQL manifests..."
+echo "📦  Applying PostgreSQL manifests..."
 kubectl apply -f k8s/postgres/postgres-pv-pvc.yaml
 kubectl apply -f k8s/postgres/postgres-secret.yaml
 kubectl apply -f k8s/postgres/postgres-deployment.yaml
 
-echo "✅ PostgreSQL should now be deploying..."
+echo "✅  PostgreSQL should now be deploying..."
 
-echo "🔍 Checking pod status:"
+echo "🔍  Checking pod status:"
 kubectl get pods
 
-echo "💡 Next steps: Deploy Keycloak, Ingress rules, and Dashboard."
+echo "💡  Next steps: Deploy Keycloak, Ingress rules, and Dashboard."
 
-echo "✅ Done (for now)."
+echo "✅  Done (for now)."
