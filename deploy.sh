@@ -23,18 +23,21 @@ kubectl wait --namespace ingress-nginx \
   --selector=app.kubernetes.io/component=controller \
   --timeout=90s
 
-echo "📦  Applying PostgreSQL manifests..."
-kubectl apply -f k8s/postgres/postgres-pv-pvc.yaml
-kubectl apply -f k8s/postgres/postgres-secret.yaml
-kubectl apply -f k8s/postgres/postgres-deployment.yaml
+echo "📦  Creating 'keycloak' namespace if it doesn't exist..."
+kubectl get namespace keycloak &>/dev/null || kubectl create namespace keycloak
+
+echo "📦  Applying PostgreSQL manifests into 'keycloak' namespace..."
+kubectl apply -f k8s/postgres/postgres-pv-pvc.yaml -n keycloak
+kubectl apply -f k8s/postgres/postgres-secret.yaml -n keycloak
+kubectl apply -f k8s/postgres/postgres-deployment.yaml -n keycloak
 
 echo "✅  PostgreSQL should now be deploying..."
 
 echo "⏳  Waiting for PostgreSQL pod to be ready..."
-
 if kubectl wait --for=condition=Ready pod \
   --selector=app=postgres \
-  --timeout=90s
+  --timeout=90s \
+  -n keycloak
 then
   echo "✅  PostgreSQL pod is ready!"
 else
@@ -42,13 +45,13 @@ else
 fi
 
 echo "📦  PVC status:"
-kubectl get pvc
+kubectl get pvc -n keycloak
 
 echo "📦  PV status:"
-kubectl get pv
+kubectl get pv  # PVs are cluster-wide, no -n needed
 
 echo "🌐  Service status:"
-kubectl get svc
+kubectl get svc -n keycloak
 
 echo "💡  Next steps: Deploy Keycloak, Ingress rules, and Dashboard."
 
