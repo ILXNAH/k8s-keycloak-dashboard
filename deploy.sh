@@ -34,7 +34,8 @@ echo "⏳  Waiting for PostgreSQL pod to be ready..."
 
 if kubectl wait --for=condition=Ready pod \
   --selector=app=postgres \
-  --timeout=90s; then
+  --timeout=90s
+then
   echo "✅  PostgreSQL pod is ready!"
 else
   echo "⚠️  PostgreSQL pod not ready after 90s — continuing anyway."
