@@ -6,7 +6,6 @@ To set up the Kubernetes cluster used in this project, follow the instructions i
 
 ## 🧪 Tested Environment  
 The project was built and tested on the following environment:
-
 ```
 OS: Ubuntu 24.04.2 LTS (WSL2)  
 Client Version: v1.32.2  
@@ -115,7 +114,7 @@ kubectl describe pod <postgres-pod-name>
 
 When correctly deployed, the pod should be `Running`, and the service should expose port `5432` internally to other components (e.g., Keycloak).
 
-### 🪵 View Logs (Optional)
+### 🪵 View Logs (Optional):
 To check PostgreSQL startup logs or debug issues:
 ```bash
 kubectl logs <postgres-pod-name>
@@ -125,12 +124,69 @@ You can auto-complete the pod name with `Tab` after typing `postgres-`.
 
 ---
 
-## 🛠️ Quick Start with `deploy.sh`  
+## 🧩 Keycloak Deployment (via Helm)
+Keycloak is deployed using the official [Bitnami Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak). It connects to the PostgreSQL instance deployed on Day 1 and uses a custom `values.yaml` file to configure external database access and admin credentials.
+
+### 📁 Files:
+- [`k8s/keycloak/keycloak-values.yaml`](k8s/keycloak/keycloak-values.yaml)  
+- [`k8s/keycloak/keycloak-admin-secret.yaml`](k8s/keycloak/keycloak-admin-secret.yaml)
+
+### 🛠️ Prerequisites:
+#### 🔧 Install Helm (if not already installed)
+```bash
+sudo snap install helm --classic
+helm version
+```
+
+#### 📦 Add Bitnami Chart Repository
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+```
+
+### ⚙️ Custom Settings:
+- Disables embedded PostgreSQL (`postgresql.enabled: false`)
+- Connects to external PostgreSQL service (`postgres`) using:
+  - user: `keycloak`
+  - password: `supersecret`
+  - database: `keycloakdb`
+- Admin credentials are stored securely using a Kubernetes Secret:
+  - admin-user: `admin`
+  - admin-password: `adminpassword`
+- Exposes Keycloak via temporary NodePort:
+  - HTTP: `32080`
+  - HTTPS: `32443`
+
+### ✅ Apply Secret and Verify:
+```bash
+kubectl apply -f k8s/keycloak/keycloak-admin-secret.yaml
+kubectl get secret keycloak-admin-secret -o yaml
+```
+
+### 🚀 Deploy Keycloak:
+```bash
+helm install keycloak bitnami/keycloak -f k8s/keycloak/keycloak-values.yaml
+```
+
+> 💡 In production, it's recommended to encrypt secrets at rest and rotate them periodically.
+
+### 🔍 Verify Deployment (after install):
+```bash
+kubectl get pods
+kubectl get svc
+```
+
+You should see a pod named `keycloak-xxxxx` in the `Running` state and a service exposing the configured NodePort.
+
+> A proper Ingress setup (with TLS) will be configured later in **Day 3**.
+
+---
+
+## 🛠️ Quick Start with [`deploy.sh`](deploy.sh)
 This project includes a deployment script to automate the cluster setup and PostgreSQL installation.
 
-### 🚀 How to Use
+### 🚀 How to Use:
 After installing Docker, Minikube, and kubectl, you can launch the stack with:
-
 ```bash
 ./deploy.sh
 ```
@@ -146,8 +202,9 @@ This script:
 > 🧠 Note: This script is optimized for **WSL2 + Docker Desktop**.  
 > If you're using native Linux or macOS, you may need to modify the Minikube driver flag (e.g., `--driver=virtualbox`).
 
-### 📦 What’s Next?  
-The script sets up everything needed for Keycloak and Kubernetes Dashboard to be deployed next.
+### 🧭 What’s Covered by the Script
+This script automates the deployment of the Kubernetes cluster and PostgreSQL database, including persistent storage and secrets.  
+Keycloak and Kubernetes Dashboard are deployed separately using Helm and custom configuration.
 
 ---
 
@@ -156,3 +213,10 @@ The script sets up everything needed for Keycloak and Kubernetes Dashboard to be
 A quick-reference guide for working with Minikube and applying manifests.
 
 📄 [View cheat sheet](notes/k8s-minikube-cheatsheet.md)  
+
+---
+
+## 🔒 Optional Hardening & Future Enhancements
+- [ ] Helm `upgrade` instead of `install` for re-runs
+- [ ] Admin credential rotation policy
+- [ ] Backup strategy for PostgreSQL
