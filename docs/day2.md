@@ -20,7 +20,7 @@ PostgreSQL will **not** be bundled — it will connect to the existing standalon
 To be done using Helm:  
 - [x] Add Bitnami Helm repo
 - [x] Create `keycloak-values.yaml`
-- [ ] Set external DB config (host, user, password, db name)
+- [x] Set external DB config (host, user, password, db name)
 - [ ] Set admin user credentials via secret
 - [ ] Configure resource limits and probes
 - [ ] Install chart with custom values
