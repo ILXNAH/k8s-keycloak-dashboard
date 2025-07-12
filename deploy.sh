@@ -38,6 +38,15 @@ kubectl wait --for=condition=Ready pod \
 
 echo "✅  PostgreSQL pod is ready!"
 
+echo "📦  PVC status:"
+kubectl get pvc
+
+echo "📦  PV status:"
+kubectl get pv
+
+echo "🌐  Service status:"
+kubectl get svc
+
 echo "💡  Next steps: Deploy Keycloak, Ingress rules, and Dashboard."
 
 echo "✅  Done (for now)."
