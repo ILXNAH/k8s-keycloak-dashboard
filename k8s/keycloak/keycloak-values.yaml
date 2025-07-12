@@ -1,0 +1,16 @@
+auth:
+  adminUser: admin
+  adminPassword: adminpassword
+externalDatabase:
+  host: postgres
+  port: 5432
+  user: keycloak
+  password: supersecret
+  database: keycloakdb
+postgresql:
+  enabled: false # disable bundled PostgreSQL
+service:
+  type: NodePort
+  nodePorts:
+    http: 32080
+    https: 32443
