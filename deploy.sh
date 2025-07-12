@@ -30,8 +30,13 @@ kubectl apply -f k8s/postgres/postgres-deployment.yaml
 
 echo "✅  PostgreSQL should now be deploying..."
 
-echo "🔍  Checking pod status:"
-kubectl get pods
+echo "⏳  Waiting for PostgreSQL pod to be ready..."
+
+kubectl wait --for=condition=Ready pod \
+  --selector=app=postgres \
+  --timeout=90s
+
+echo "✅  PostgreSQL pod is ready!"
 
 echo "💡  Next steps: Deploy Keycloak, Ingress rules, and Dashboard."
 
