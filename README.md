@@ -119,8 +119,9 @@ To check PostgreSQL startup logs or debug issues:
 ```bash
 kubectl logs <postgres-pod-name>
 ```
-
-You can auto-complete the pod name with `Tab` after typing `postgres-`.
+> 💡 **Tip**: If you're using a terminal with `kubectl` shell completion enabled  
+> (e.g., in WSL2 with Bash or Zsh), you can press `Tab` after typing `postgres-`  
+> to auto-complete the pod name.
 
 ---
 
