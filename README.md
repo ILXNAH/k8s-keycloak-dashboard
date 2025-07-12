@@ -198,6 +198,10 @@ This script automates the deployment of the Kubernetes cluster and PostgreSQL da
 A quick-reference guide for working with Minikube and applying manifests.  
 📄 [View cheat sheet](notes/k8s-minikube-cheatsheet.md)  
 
+## 🔹 Keycloak Admin Access Helper (Pre-Ingress)
+Quickly access Keycloak via NodePort in early development.
+📄 [keycloak-env-setup.txt](k8s/keycloak/keycloak-env-setup.txt)
+
 ---
 
 ## 🔒 Optional Hardening & Future Enhancements

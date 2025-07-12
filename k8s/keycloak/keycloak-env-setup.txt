@@ -1,0 +1,13 @@
+# Use this helper to quickly export Keycloak NodePort access info
+
+# Export the NodePort and cluster IP
+export HTTP_NODE_PORT=$(kubectl get svc keycloak -o jsonpath="{.spec.ports[?(@.name=='http')].nodePort}")
+export NODE_IP=$(kubectl get nodes -o jsonpath="{.items[0].status.addresses[0].address}")
+export KEYCLOAK_URL="http://${NODE_IP}:${HTTP_NODE_PORT}/"
+
+# Usage:
+#   source k8s/keycloak/keycloak-env-setup.txt
+#   echo $KEYCLOAK_URL
+
+# ⚠️ Note: This method is only valid BEFORE Ingress is configured.
+# Once you have an Ingress (e.g. https://keycloak.localhost), use that instead.
