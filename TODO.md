@@ -107,12 +107,12 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 🔧 Advanced Configuration Features
-- [x] Automation script (e.g. in bash, `deploy.sh`)
-- [ ] Cross-platform testing & optimization for `deploy.sh`  
+- [x] Automation script (e.g. in bash, [`deploy.sh`](deploy.sh))
+- [ ] Cross-platform testing & optimization for [`deploy.sh`](deploy.sh)  
   - Verify on native Linux, macOS, and non-Docker environments  
   - Improve driver detection or provide CLI flags  
   - Add fallback messages or better portability where needed
-- [ ] Optional automation script for Keycloak (`deploy-keycloak.sh`)
+- [ ] Optional automation script for Keycloak ([`deploy-keycloak.sh`](deploy-keycloak.sh))
 - [ ] Use liveness and readiness probes
 - [ ] Set resource requests and limits
 - [ ] Mention future improvements:
