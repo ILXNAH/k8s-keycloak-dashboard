@@ -37,9 +37,10 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 
 - [x] Kubernetes cluster (Minikube with Ingress)
 - [x] PostgreSQL (with persistent storage)
-- [ ] Keycloak (backed by PostgreSQL, not H2)
-- [ ] Kubernetes Dashboard
-- [ ] Ingress to expose Keycloak & Dashboard over HTTP (HTTPS = bonus)
+- [x] Keycloak (backed by PostgreSQL, not H2)
+- [x] Kubernetes Dashboard
+- [x] Ingress to expose Keycloak & Dashboard over HTTP 
+  - [ ] (HTTPS = bonus)
 
 ---
 
@@ -59,25 +60,25 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 🧩 Keycloak  
-- [ ] Deploy standalone Keycloak container
-- [ ] Use PostgreSQL as its backend (no embedded H2 database)
-- [ ] Expose Keycloak admin console via web (web browser accessible)
-- [ ] Store admin credentials securely (e.g., secret/env)
+- [x] Deploy standalone Keycloak container
+- [x] Use PostgreSQL as its backend (no embedded H2 database)
+- [x] Expose Keycloak admin console via web (web browser accessible)
+- [ ] Store admin credentials securely (e.g., secret/env)                     # reverted from secret due to deployment issues 
 
 ---
 
 ## 🖥️ Kubernetes Dashboard  
-- [ ] Deploy official Kubernetes Dashboard
-- [ ] Web-accessible via Ingress
-- [ ] Token-based login (or other method, must be described)
+- [x] Deploy official Kubernetes Dashboard
+- [x] Web-accessible via Ingress
+- [x] Token-based login
 
 ---
 
 ## 🌐 Ingress Setup  
-- [ ] Install and configure Ingress Controller (e.g. NGINX)
-- [ ] Create Ingress rules for:
-  - [ ] Keycloak (e.g. `keycloak.local`)
-  - [ ] Kubernetes Dashboard (e.g. `dashboard.local`)
+- [x] Install and configure Ingress Controller (e.g. NGINX) -> enabled via Minikube
+- [x] Create Ingress rules for:
+  - [x] Keycloak (e.g. `keycloak.local`)
+  - [x] Kubernetes Dashboard (e.g. `dashboard.local`)
 - [ ] HTTPS support via cert-manager
 
 ---
