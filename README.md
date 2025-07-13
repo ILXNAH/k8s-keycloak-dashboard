@@ -178,6 +178,46 @@ To verify that **liveness and readiness probes** are working:
 
 ---
 
+## 🌐 Ingress Configuration
+To make services accessible via browser-friendly hostnames, two Ingress resources were created:
+- `keycloak.local` for the Keycloak admin console
+- `dashboard.local` for the Kubernetes Dashboard
+
+### ✅ Requirements
+- The [NGINX Ingress controller](https://minikube.sigs.k8s.io/docs/handbook/ingress/) is enabled via Minikube:
+  ```bash
+  minikube addons enable ingress
+  ```
+- Ingress manifests are located in:
+- [`k8s/keycloak/keycloak-ingress.yaml`](k8s/keycloak/keycloak-ingress.yaml)
+- [`k8s/dashboard/dashboard-ingress.yaml`](k8s/dashboard/dashboard-ingress.yaml)
+
+### 🧭 Access in Browser
+To use these hostnames in your browser:
+1. **Run the Ingress tunnel:**
+   ```bash
+   minikube tunnel
+   ```
+   > Keep this terminal open while accessing services. It forwards HTTP/HTTPS traffic to the Ingress controller.
+2. **Edit Windows hosts file**  
+   Location: `C:\Windows\System32\drivers\etc\hosts`  
+   Add the following line:
+   ```
+   127.0.0.1 keycloak.local dashboard.local
+   ```
+3. **Open URLs:**
+   - http://keycloak.local
+   - http://dashboard.local
+
+### 🔐 Authentication Methods
+- **Keycloak:** Admin credentials are set via a Kubernetes Secret and passed through Helm values.
+- **Kubernetes Dashboard:** Logged in using a ServiceAccount token generated via:
+  ```bash
+  kubectl -n kubernetes-dashboard create token admin-user
+  ```
+
+---
+
 ## 🛠️ Quick Start with [`deploy.sh`](deploy.sh)
 This project includes a deployment script to automate the cluster setup and PostgreSQL installation.
 
