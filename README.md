@@ -211,7 +211,7 @@ To use these hostnames in your browser:
 
 ### 🔐 Authentication Methods
 - **Keycloak:** Admin credentials are set via a Kubernetes Secret and passed through Helm values.
-- **Kubernetes Dashboard:** Logged in using a ServiceAccount token generated via:
+- **Kubernetes Dashboard:** Log in using a ServiceAccount token generated via:
   ```bash
   kubectl -n kubernetes-dashboard create token admin-user
   ```
