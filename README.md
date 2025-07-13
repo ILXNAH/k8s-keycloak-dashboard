@@ -3,6 +3,28 @@
 
 ---
 
+## 🛠️ Quick Start with [`deploy.sh`](deploy.sh)
+This project includes a deployment script to automate the cluster setup and PostgreSQL installation.
+
+### 🚀 How to Use
+After installing Docker, Minikube, and kubectl, you can launch the stack with:
+```bash
+./deploy.sh
+```
+This script:
+- Starts a Minikube cluster with the Docker driver
+- Enables the NGINX Ingress controller
+- Applies all PostgreSQL manifests:
+  - PersistentVolume and PersistentVolumeClaim
+  - Secret with DB credentials
+  - Deployment and ClusterIP service  
+> 🧠 Note: This script is optimized for **WSL2 + Docker Desktop**. If you're using native Linux or macOS, you may need to modify the Minikube driver flag (e.g., `--driver=virtualbox`).
+
+### 🧭 What’s Covered by the Script
+This script automates the deployment of the Kubernetes cluster and PostgreSQL database, including persistent storage and secrets. Keycloak and Kubernetes Dashboard are deployed separately using Helm and custom configuration.
+
+---
+
 ## 🧭 Architecture Diagram
 <p align="center">
   <img src="notes/architecture.png" alt="Architecture Diagram" width="400"/>
@@ -228,28 +250,6 @@ To use these hostnames in your browser:
   ```bash
   kubectl -n kubernetes-dashboard create token admin-user
   ```
-
----
-
-## 🛠️ Quick Start with [`deploy.sh`](deploy.sh)
-This project includes a deployment script to automate the cluster setup and PostgreSQL installation.
-
-### 🚀 How to Use
-After installing Docker, Minikube, and kubectl, you can launch the stack with:
-```bash
-./deploy.sh
-```
-This script:
-- Starts a Minikube cluster with the Docker driver
-- Enables the NGINX Ingress controller
-- Applies all PostgreSQL manifests:
-  - PersistentVolume and PersistentVolumeClaim
-  - Secret with DB credentials
-  - Deployment and ClusterIP service  
-> 🧠 Note: This script is optimized for **WSL2 + Docker Desktop**. If you're using native Linux or macOS, you may need to modify the Minikube driver flag (e.g., `--driver=virtualbox`).
-
-### 🧭 What’s Covered by the Script
-This script automates the deployment of the Kubernetes cluster and PostgreSQL database, including persistent storage and secrets. Keycloak and Kubernetes Dashboard are deployed separately using Helm and custom configuration.
 
 ---
 
