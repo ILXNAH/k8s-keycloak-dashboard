@@ -23,10 +23,10 @@ Ingress addon and Kubernetes Dashboard were both enabled and verified.
 ## 📦 PostgreSQL Persistent Storage Setup  
 To ensure PostgreSQL data persists across pod restarts and cluster reboots, a `PersistentVolume` (PV) and `PersistentVolumeClaim` (PVC) were defined manually.
 
-### 📁 Files:  
+### 📁 Files  
 - `k8s/postgres/postgres-pv-pvc.yaml`
 
-### 🧱 Resources Created:  
+### 🧱 Resources Created  
 - **PersistentVolume** `postgres-pv`  
   - Storage: 1Gi  
   - Path: `/data/postgres` on the Minikube host (via `hostPath`)  
@@ -37,12 +37,12 @@ To ensure PostgreSQL data persists across pod restarts and cluster reboots, a `P
 
 > Note: The PVC explicitly sets `storageClassName: ""` to prevent binding to the default dynamic storage class provided by Minikube.
 
-### ✅ Apply Manifests:  
+### ✅ Apply Manifests  
 ```bash
 kubectl apply -f k8s/postgres/postgres-pv-pvc.yaml
 ```
 
-### 🔍 Verify Status:  
+### 🔍 Verify Status  
 ```bash
 kubectl get pv
 kubectl get pvc
@@ -54,22 +54,22 @@ The PVC should show `STATUS: Bound` and reference the `postgres-pv` volume.
 ## 🔐 PostgreSQL Credentials via Kubernetes Secret  
 PostgreSQL credentials are managed securely using a Kubernetes `Secret` resource. This prevents hardcoding sensitive data directly in deployment manifests or version control.
 
-### 📁 File:  
+### 📁 File  
 - `k8s/postgres/postgres-secret.yaml`
 
-### 🧾 Secret Contents:  
+### 🧾 Secret Contents  
 The secret contains the following key-value pairs:
 - `POSTGRES_USER`: the PostgreSQL username (e.g., `keycloak`)
 - `POSTGRES_PASSWORD`: the database password (e.g., `supersecret`)
 - `POSTGRES_DB`: the name of the database to create on container init (e.g., `keycloakdb`)  
 These values are automatically mounted into the PostgreSQL container using the `envFrom` directive.
 
-### ✅ Apply Secret:  
+### ✅ Apply Secret    
 ```bash
 kubectl apply -f k8s/postgres/postgres-secret.yaml
 ```
 
-### 🔍 Verify Status:  
+### 🔍 Verify Status    
 ```bash
 kubectl get secret postgres-secret -o yaml
 ```
@@ -87,20 +87,20 @@ You should see base64-encoded values for `POSTGRES_USER`, `POSTGRES_PASSWORD`, a
 ## 🐘 PostgreSQL Deployment  
 PostgreSQL was deployed as a standalone pod using the official `postgres:16` image. It runs on the Kubernetes cluster with persistent storage and secure credentials.
 
-### 📁 File:  
+### 📁 File  
 - `k8s/postgres/postgres-deployment.yaml`
 
-### 📦 Features:  
+### 📦 Features  
 - **Environment variables** (DB name, user, password) are injected securely via a Kubernetes Secret (`postgres-secret`)
 - **Persistent data storage** using a `PersistentVolumeClaim` (`postgres-pvc`) mounted at `/var/lib/postgresql/data`
 - **Internal accessibility** via a `ClusterIP` service (`postgres`) on port `5432`
 
-### ✅ Apply Manifests:  
+### ✅ Apply Manifests  
 ```bash
 kubectl apply -f k8s/postgres/postgres-deployment.yaml
 ```
 
-### 🔍 Verify Status:  
+### 🔍 Verify Status  
 ```bash
 kubectl get pods
 kubectl get svc
@@ -108,7 +108,7 @@ kubectl describe pod <postgres-pod-name>
 ```  
 When correctly deployed, the pod should be `Running`, and the service should expose port `5432` internally to other components (e.g., Keycloak).
 
-### 🐞 View Logs (Optional):
+### 🐞 View Logs  
 To check PostgreSQL startup logs or debug issues:
 ```bash
 kubectl logs <postgres-pod-name>
@@ -117,67 +117,62 @@ kubectl logs <postgres-pod-name>
 
 ---
 
-## 🧩 Keycloak Deployment (via Helm)
+## 🧩 Keycloak Deployment  
 Keycloak is deployed using the official [Bitnami Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak). It connects to the PostgreSQL instance (deployed separately) and uses a custom `keycloak-values.yaml` file to configure external database access, resource limits, probes, and admin credentials.
 
-### 📁 Files:
+### 📁 Files  
 - [`k8s/keycloak/keycloak-values.yaml`](k8s/keycloak/keycloak-values.yaml)  
 
-### 🛠️ Prerequisites:
-#### 🔧 Install Helm (if not already installed)
+### 🛠️ Prerequisites  
+#### 🔧 Install Helm (if not already installed)  
 ```bash
 sudo snap install helm --classic
 helm version
 ```
 
-#### 📦 Add Bitnami Chart Repository:
+#### 📦 Add Bitnami Chart Repository  
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 ```
 
-### ⚙️ Custom Configuration Highlights:
+### ⚙️ Custom Configuration Highlights  
 - **External PostgreSQL** used (embedded DB disabled)
 - **Admin credentials** are passed directly in `values.yaml`
 - **NodePort exposure** (HTTP: `32080`, HTTPS: `32443`)
 - **Resource requests and limits** defined
 - **Liveness and readiness probes** enabled and tested
 
-### 🚀 Deploy Keycloak:
+### 🚀 Deploy Keycloak  
 ```bash
 helm install keycloak bitnami/keycloak -n keycloak -f k8s/keycloak/keycloak-values.yaml
 ```
 > 💡 If reinstalling, clean up any existing release with:  
 > `helm uninstall keycloak -n keycloak`
 
-### 🔍 Verify Deployment:
+### 🔍 Verify Deployment  
 ```bash
 kubectl get pods -n keycloak
 kubectl get svc -n keycloak
 ```  
 You should see a pod named `keycloak-0` in the `Running` state and a service exposing the configured NodePort.
 
-### 🔬 Probe Verification:
+### 🔬 Probe Verification  
 To verify that **liveness and readiness probes** are working:
-
 1. Get the dynamic NodePort URL:
    ```bash
    minikube service keycloak -n keycloak --url
    ```
-
 2. Test **readiness probe** endpoint using:
    ```bash
    curl -I $(minikube service keycloak -n keycloak --url)/realms/master
    ```
-
    You should receive an `HTTP/1.1 200 OK` response with realm metadata — confirming readiness.
-
 3. **Liveness probe** is a TCP socket check on the same dynamic port. You can simulate it using:
    ```bash
    nc -zv 127.0.0.1 <dynamic-port>
    ```
    Replace `<dynamic-port>` with the port shown in the `minikube service` output (e.g. `33335`).
-
 > Both probes have been confirmed functional during this deployment.
 
 ---
@@ -185,7 +180,7 @@ To verify that **liveness and readiness probes** are working:
 ## 🛠️ Quick Start with [`deploy.sh`](deploy.sh)
 This project includes a deployment script to automate the cluster setup and PostgreSQL installation.
 
-### 🚀 How to Use:
+### 🚀 How to Use
 After installing Docker, Minikube, and kubectl, you can launch the stack with:
 ```bash
 ./deploy.sh
@@ -209,7 +204,7 @@ This script automates the deployment of the Kubernetes cluster and PostgreSQL da
 A quick-reference guide for working with Minikube and applying manifests.  
 📄 [View cheat sheet](notes/k8s-minikube-cheatsheet.md)  
 
-## 🔹 Keycloak Admin Access Helper (Pre-Ingress)
+### 🔹 Keycloak Admin Access Helper (Pre-Ingress)
 Quickly access Keycloak via NodePort in early development.
 📄 [keycloak-env-setup.txt](k8s/keycloak/keycloak-env-setup.txt)
 
