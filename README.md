@@ -1,3 +1,14 @@
+# 🚀 k8s-keycloak-dashboard
+> A self-managed Kubernetes setup featuring PostgreSQL, Keycloak (Helm), and the Kubernetes Dashboard — all exposed via Ingress.
+
+---
+
+## 🧭 Architecture Diagram
+![Architecture Diagram](notes/architecture.png)
+This diagram illustrates how the Ingress Controller routes HTTP traffic from external users to Keycloak and the Kubernetes Dashboard, while Keycloak communicates with PostgreSQL internally via a Kubernetes Service.
+
+---
+
 ## 🏗️ Cluster Setup  
 To set up the Kubernetes cluster used in this project, follow the instructions in  
 👉 [setup/cluster-setup.md](setup/cluster-setup.md)
