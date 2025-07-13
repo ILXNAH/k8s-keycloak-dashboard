@@ -3,25 +3,61 @@
 
 ---
 
-## 🛠️ Quick Start with [`deploy.sh`](deploy.sh)
-This project includes a deployment script to automate the cluster setup and PostgreSQL installation.
+## 🛠️ Quick Start
+
+This project includes deployment scripts to automate the full environment setup:
+
+- [`deploy.sh`](deploy.sh) – Sets up the Kubernetes cluster and PostgreSQL
+- [`deploy-keycloak-dashboard.sh`](deploy-keycloak-dashboard.sh) – Deploys Keycloak, Kubernetes Dashboard, and Ingress
 
 ### 🚀 How to Use
-After installing Docker, Minikube, and kubectl, you can launch the stack with:
+
+After installing **Docker**, **Minikube**, and **kubectl**, run:
+
 ```bash
+# 1. Start Minikube and deploy PostgreSQL
 ./deploy.sh
+
+# 2. Deploy Keycloak, Dashboard, and Ingress
+./deploy-keycloak-dashboard.sh
 ```
-This script:
+
+---
+
+### 📦 What’s Covered by Each Script
+
+#### 🧱 `deploy.sh`:
 - Starts a Minikube cluster with the Docker driver
 - Enables the NGINX Ingress controller
 - Applies all PostgreSQL manifests:
   - PersistentVolume and PersistentVolumeClaim
   - Secret with DB credentials
-  - Deployment and ClusterIP service  
-> 🧠 Note: This script is optimized for **WSL2 + Docker Desktop**. If you're using native Linux or macOS, you may need to modify the Minikube driver flag (e.g., `--driver=virtualbox`).
+  - Deployment and ClusterIP service
 
-### 🧭 What’s Covered by the Script
-This script automates the deployment of the Kubernetes cluster and PostgreSQL database, including persistent storage and secrets. Keycloak and Kubernetes Dashboard are deployed separately using Helm and custom configuration.
+> 🧠 Optimized for **WSL2 + Docker Desktop**.  
+> On native Linux or macOS, consider modifying the Minikube driver flag (e.g., `--driver=virtualbox`).
+
+#### 🔩 `deploy-keycloak-dashboard.sh`:
+- Installs Keycloak via Helm using `keycloak-values.yaml`
+- Waits for Keycloak pod readiness (with 10-minute timeout)
+- Deploys the official Kubernetes Dashboard
+- Applies Ingress rules for `keycloak.local` and `dashboard.local`
+- Provides browser access instructions and token generation info
+
+---
+
+### 🌐 Access URLs
+
+Once deployed:
+
+- **Keycloak:** http://keycloak.local  
+  Login: `admin` / `adminpassword`
+
+- **Kubernetes Dashboard:** http://dashboard.local  
+  Login:  
+  ```bash
+  kubectl -n kubernetes-dashboard create token admin-user
+  ```
 
 ---
 
