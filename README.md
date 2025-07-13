@@ -168,6 +168,7 @@ To verify that **liveness and readiness probes** are working:
    curl -I $(minikube service keycloak -n keycloak --url)/realms/master
    ```
    You should receive an `HTTP/1.1 200 OK` response with realm metadata — confirming readiness.
+
 3. **Liveness probe** is a TCP socket check on the same dynamic port. You can simulate it using:
    ```bash
    nc -zv 127.0.0.1 <dynamic-port>
