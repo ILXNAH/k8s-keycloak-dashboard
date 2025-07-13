@@ -113,7 +113,8 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
   - Verify on native Linux, macOS, and non-Docker environments  
   - Improve driver detection or provide CLI flags  
   - Add fallback messages or better portability where needed
-- [ ] Optional automation script for Keycloak ([`deploy-keycloak.sh`](deploy-keycloak.sh))
+- [x] Optional automation script for Keycloak ([`deploy-keycloak-dashboard.sh`](deploy-keycloak.sh))
+  - [ ] Testing
 - [x] Use liveness and readiness probes -> Defined in keycloak-values.yaml
 - [x] Set resource requests and limits -> Also defined in keycloak-values.yaml
 - [ ] Mention future improvements:
