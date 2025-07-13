@@ -84,13 +84,13 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 📚 Documentation (README content)
-- [ ] Describe tested environment (OS, K8s version, etc.)
-- [ ] How to deploy each component
-- [ ] Ingress routes (hostnames, ports) & `/etc/hosts` setup
-- [ ] Login instructions for Keycloak admin console and Kubernetes Dashboard
-- [ ] Explain how components work together:
-  - [ ] Role of Ingress
-  - [ ] Keycloak → PostgreSQL link
+- [x] Describe tested environment (OS, K8s version, etc.) ->  WSL2 Ubuntu 24.04, Minikube, etc. listed
+- [x] How to deploy each component -> Covered in each section with Helm and `kubectl` instructions
+- [x] Ingress routes (hostnames, ports) & `/etc/hosts` setup -> Explained with `keycloak.local` and `dashboard.local`
+- [x] Login instructions for Keycloak admin console and Kubernetes Dashboard -> static credentials defined + token usage
+- [x] Explain how components work together:
+  - [x] Role of Ingress
+  - [x] Keycloak → PostgreSQL link
 - [ ] Add architecture diagram using **Lucidchart**:
   - Show interaction between components:
     - External user
