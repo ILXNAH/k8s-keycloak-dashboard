@@ -61,4 +61,5 @@ echo "🔑  To access:"
 echo "-   http://keycloak.local  → admin / adminpassword"
 echo "-   http://dashboard.local → login with token:"
 echo ""
-echo "kubectl -n kubernetes-dashboard create token admin-user"
+echo "📥  Dashboard Token:"
+kubectl -n kubernetes-dashboard create token admin-user
