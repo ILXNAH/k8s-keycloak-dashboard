@@ -118,11 +118,10 @@ kubectl logs <postgres-pod-name>
 ---
 
 ## 🧩 Keycloak Deployment (via Helm)
-Keycloak is deployed using the official [Bitnami Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak). It connects to the PostgreSQL instance deployed on Day 1 and uses a custom `values.yaml` file to configure external database access and admin credentials.
+Keycloak is deployed using the official [Bitnami Helm chart](https://artifacthub.io/packages/helm/bitnami/keycloak). It connects to the PostgreSQL instance (deployed separately) and uses a custom `keycloak-values.yaml` file to configure external database access, resource limits, probes, and admin credentials.
 
 ### 📁 Files:
 - [`k8s/keycloak/keycloak-values.yaml`](k8s/keycloak/keycloak-values.yaml)  
-- [`k8s/keycloak/keycloak-admin-secret.yaml`](k8s/keycloak/keycloak-admin-secret.yaml)
 
 ### 🛠️ Prerequisites:
 #### 🔧 Install Helm (if not already installed)
@@ -131,43 +130,55 @@ sudo snap install helm --classic
 helm version
 ```
 
-#### 📦 Add Bitnami Chart Repository
+#### 📦 Add Bitnami Chart Repository:
 ```bash
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 ```
 
-### ⚙️ Custom Settings:
-- Disables embedded PostgreSQL (`postgresql.enabled: false`)
-- Connects to external PostgreSQL service (`postgres`) using:
-  - user: `keycloak`
-  - password: `supersecret`
-  - database: `keycloakdb`
-- Admin credentials are stored securely using a Kubernetes Secret:
-  - admin-user: `admin`
-  - admin-password: `adminpassword`
-- Exposes Keycloak via temporary NodePort:
-  - HTTP: `32080`
-  - HTTPS: `32443`
-
-### ✅ Apply Secret and Verify:
-```bash
-kubectl apply -f k8s/keycloak/keycloak-admin-secret.yaml
-kubectl get secret keycloak-admin-secret -o yaml
-```
+### ⚙️ Custom Configuration Highlights:
+- **External PostgreSQL** used (embedded DB disabled)
+- **Admin credentials** are passed directly in `values.yaml`
+- **NodePort exposure** (HTTP: `32080`, HTTPS: `32443`)
+- **Resource requests and limits** defined
+- **Liveness and readiness probes** enabled and tested
 
 ### 🚀 Deploy Keycloak:
 ```bash
-helm install keycloak bitnami/keycloak -f k8s/keycloak/keycloak-values.yaml
-```  
-> 💡 In production, it's recommended to encrypt secrets at rest and rotate them periodically.
+helm install keycloak bitnami/keycloak -n keycloak -f k8s/keycloak/keycloak-values.yaml
+```
+> 💡 If reinstalling, clean up any existing release with:  
+> `helm uninstall keycloak -n keycloak`
 
-### 🔍 Verify Deployment (after install):
+### 🔍 Verify Deployment:
 ```bash
-kubectl get pods
-kubectl get svc
+kubectl get pods -n keycloak
+kubectl get svc -n keycloak
 ```  
-You should see a pod named `keycloak-xxxxx` in the `Running` state and a service exposing the configured NodePort.
+You should see a pod named `keycloak-0` in the `Running` state and a service exposing the configured NodePort.
+
+### 🔬 Probe Verification:
+To verify that **liveness and readiness probes** are working:
+
+1. Get the dynamic NodePort URL:
+   ```bash
+   minikube service keycloak -n keycloak --url
+   ```
+
+2. Test **readiness probe** endpoint using:
+   ```bash
+   curl -I $(minikube service keycloak -n keycloak --url)/realms/master
+   ```
+
+   You should receive an `HTTP/1.1 200 OK` response with realm metadata — confirming readiness.
+
+3. **Liveness probe** is a TCP socket check on the same dynamic port. You can simulate it using:
+   ```bash
+   nc -zv 127.0.0.1 <dynamic-port>
+   ```
+   Replace `<dynamic-port>` with the port shown in the `minikube service` output (e.g. `33335`).
+
+> Both probes have been confirmed functional during this deployment.
 
 ---
 
