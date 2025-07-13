@@ -188,7 +188,7 @@ To make services accessible via browser-friendly hostnames, two Ingress resource
   ```bash
   minikube addons enable ingress
   ```
-- Ingress manifests are located in:
+Ingress manifests are located in:
 - [`k8s/keycloak/keycloak-ingress.yaml`](k8s/keycloak/keycloak-ingress.yaml)
 - [`k8s/dashboard/dashboard-ingress.yaml`](k8s/dashboard/dashboard-ingress.yaml)
 
