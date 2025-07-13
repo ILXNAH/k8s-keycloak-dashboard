@@ -4,7 +4,9 @@
 ---
 
 ## 🧭 Architecture Diagram
-![Architecture Diagram](notes/architecture.png)
+<p align="center">
+  <img src="notes/architecture.png" alt="Architecture Diagram" width="400"/>
+</p>
 This diagram illustrates how the Ingress Controller routes HTTP traffic from external users to Keycloak and the Kubernetes Dashboard, while Keycloak communicates with PostgreSQL internally via a Kubernetes Service.
 
 ---
