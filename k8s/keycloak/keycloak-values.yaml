@@ -1,15 +1,15 @@
 auth:
-  existingSecret: keycloak-admin-secret
-  passwordSecretKey: admin-password
-  usernameSecretKey: admin-user
+  createAdminUser: true
+  adminUser: admin
+  adminPassword: adminpassword
+postgresql:
+  enabled: false
 externalDatabase:
   host: postgres
   port: 5432
   user: keycloak
   password: supersecret
   database: keycloakdb
-postgresql:
-  enabled: false # disable bundled PostgreSQL
 service:
   type: NodePort
   nodePorts:
@@ -24,14 +24,14 @@ resources:
     memory: 512Mi
 livenessProbe:
   enabled: true
-  initialDelaySeconds: 180
+  initialDelaySeconds: 300
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 10
   successThreshold: 1
 readinessProbe:
   enabled: true
-  initialDelaySeconds: 120
+  initialDelaySeconds: 240
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 10
