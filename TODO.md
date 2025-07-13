@@ -91,7 +91,7 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 - [x] Explain how components work together:
   - [x] Role of Ingress
   - [x] Keycloak → PostgreSQL link
-- [ ] Add architecture diagram using **Lucidchart**:
+- [x] Add architecture diagram using **Lucidchart**:
   - Show interaction between components:
     - External user
     - Ingress Controller
