@@ -114,8 +114,8 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
   - Improve driver detection or provide CLI flags  
   - Add fallback messages or better portability where needed
 - [ ] Optional automation script for Keycloak ([`deploy-keycloak.sh`](deploy-keycloak.sh))
-- [ ] Use liveness and readiness probes
-- [ ] Set resource requests and limits
+- [x] Use liveness and readiness probes -> Defined in keycloak-values.yaml
+- [x] Set resource requests and limits -> Also defined in keycloak-values.yaml
 - [ ] Mention future improvements:
   - [ ] TLS support
   - [ ] HA/scaling
@@ -125,8 +125,9 @@ Deploy a complete environment on a **self-managed Kubernetes cluster** consistin
 ---
 
 ## 📤 Final Output
-- [ ] All manifests in GitHub repo
-- [ ] Clean, readable YAML
-- [ ] Helm chart(s) for at least one component (e.g. Keycloak via Bitnami chart with embedded DB disabled and customized values.yaml, with PostgreSQL and Ingress configured manually)
-- [ ] Well-structured README
-- [ ] Helpful comments or inline notes
+- [x] All manifests in GitHub repo -> manifests and Helm values present
+- [x] Clean, readable YAML
+- [x] Helm chart(s) for at least one component
+  - [x] Keycloak via Bitnami chart with embedded DB disabled and customized values.yaml, with PostgreSQL and Ingress configured manually
+- [x] Well-structured README
+- [x] Helpful comments or inline notes
